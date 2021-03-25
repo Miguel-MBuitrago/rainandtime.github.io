@@ -46,11 +46,11 @@ function setup(){
 
   c = document.createElement("canvas");
 
-  document.body.appendChild(c);
+  document.body.insertBefore(c,document.getElementsByClassName('content')[0]);
   //set the canvas width and height
   c.width=document.body.clientWidth;
   c.height=document.body.clientHeight;
-  document.width
+
   c.id = 'rain';
   ctx = c.getContext('2d');
 
