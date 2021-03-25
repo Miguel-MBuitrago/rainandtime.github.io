@@ -3,23 +3,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+html{
+  height: 100%;
+}
 
 body{
-  background-color: black;
-  border: 1px solid red;
-  position: relative;
-  width: 100%;
-  height: auto;
+  height: 100%;
+  background:  linear-gradient(to bottom, #202020, #111119);
+  color: white;
 }
 
 #rain{
   position: absolute;
-
   top: 0;
-}
-
-.content{
-  border: 1px solid yellow;
 }
 
 h1{
@@ -29,6 +25,5 @@ h1{
 }
 
 main{
-  height: 2000px;
-  border: 1px solid orange;
+  height: 500px;
 }
