@@ -32,11 +32,14 @@ body{
 
 header{
   padding: 10px;
+
   display: flex;
-  justify-content: space-between;
+    /* justify-content: space-around; */
   align-items: center;
+  flex-wrap: wrap;
 }
 h1{
+  display: block;
   margin-left: 50px;
   color: white;
   width: fit-content;
@@ -44,12 +47,12 @@ h1{
 
 nav{
   margin-left: auto;
+  display: block;
 }
 
 nav a{
   background: #154360 ;
   padding: 9px;
-  margin-right: 50px;
   border: 2px solid;
   border-color: #7bb8d3;
   border-radius: 5px;

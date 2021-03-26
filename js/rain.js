@@ -1,4 +1,10 @@
-var c,ctx,rainDrops;
+var c,ctx,rainDrops,timer;
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementsByName('rain')[0].addEventListener('click',setup)
+  document.getElementsByName('rain')[0].checked = false;
+},false)
+
 
 // rain
 class RainDrop{
@@ -43,28 +49,32 @@ function loop(){
 }
 
 function setup(){
+  if(document.getElementsByName('rain')[0].checked){
+    c = document.createElement("canvas");
 
-  c = document.createElement("canvas");
+    document.body.insertBefore(c,document.getElementsByClassName('content')[0]);
+    //set the canvas width and height
+    c.width=document.body.clientWidth;
+    c.height=document.body.clientHeight;
 
-  document.body.insertBefore(c,document.getElementsByClassName('content')[0]);
-  //set the canvas width and height
-  c.width=document.body.clientWidth;
-  c.height=document.body.clientHeight;
+    c.id = 'rain';
+    ctx = c.getContext('2d');
 
-  c.id = 'rain';
-  ctx = c.getContext('2d');
+    // rain = new Rain(20,20,20,16);
+    rainDrops = [];
 
-  // rain = new Rain(20,20,20,16);
-  rainDrops = [];
+    for(var i=0;i<500;i++){
+      rainDrops[i] = new RainDrop(
+        Math.floor(Math.random()*c.width) + 5,
+        Math.floor(Math.random()*100) - 200,
+        Math.floor(Math.random()*30) + 1,
+        Math.floor(Math.random()*12) + 4
+      );
+    }
 
-  for(var i=0;i<500;i++){
-    rainDrops[i] = new RainDrop(
-      Math.floor(Math.random()*c.width) + 5,
-      Math.floor(Math.random()*100) - 200,
-      Math.floor(Math.random()*30) + 1,
-      Math.floor(Math.random()*12) + 4
-    );
+    timer = setInterval(loop,10);
+  }else{
+    document.getElementById('rain').remove()
+    clearInterval(timer)
   }
-
-  setInterval(loop,10);
 }
