@@ -28,10 +28,10 @@ class RainDrop{
     this.y += this.vy;
 
     if(this.y > c.height){
-      this.x = Math.floor(Math.random()*c.width) + 5;
-      this.y = Math.floor(Math.random()*100) - 200; // 0-99
-      this.l = Math.floor(Math.random()*30) + 1; // 1-30
-      this.vy = Math.floor(Math.random()*12) + 4; // 4 - 12
+      this.x = Math.floor(Math.random() * (c.width + 10) ) - 5;
+      this.y = Math.floor(Math.random()* -c.height );
+      this.l = Math.floor(Math.random()* 20) + 1;
+      this.vy = Math.floor(Math.random()* 10) + 4;
     }
   }
 }
@@ -65,10 +65,10 @@ function setup(){
 
     for(var i=0;i<500;i++){
       rainDrops[i] = new RainDrop(
-        Math.floor(Math.random()*c.width) + 5,
-        Math.floor(Math.random()*100) - 200,
-        Math.floor(Math.random()*30) + 1,
-        Math.floor(Math.random()*12) + 4
+        Math.floor(Math.random() * (c.width + 10) ) - 5,
+        Math.floor(Math.random()* -c.height ),
+        Math.floor(Math.random()* 20) + 1,
+        Math.floor(Math.random()* 10) + 4
       );
     }
 
