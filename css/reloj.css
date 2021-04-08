@@ -5,7 +5,8 @@ main h1{
   width: fit-content;
   margin: 0  auto 50px;
 }
-
 main canvas {
   margin: auto;
+  border: 2px solid #154360;
+  border-radius: 50%;
 }
