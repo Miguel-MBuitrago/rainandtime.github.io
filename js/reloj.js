@@ -9,6 +9,7 @@ var canvas_clock = document.createElement('canvas')
 canvas_clock.id = 'canvas_clock'
 var ctx_clock = canvas_clock.getContext('2d')
 var date = new Date()
+var clock_timer;
 
 function drawDate(){
   let h1 = document.createElement('h1')
@@ -44,10 +45,11 @@ function init(){
     document.getElementsByTagName('main')[0].appendChild(div_clock)
 
     drawClock()
-    setInterval(drawClock, 500)
+    clock_timer = setInterval(drawClock, 500)
 
   }else {
     document.getElementById('clock').remove()
+    clearInterval(clock_timer)
   }
 }
 
