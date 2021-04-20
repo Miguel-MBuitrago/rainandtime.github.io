@@ -1,8 +1,7 @@
-var canvas_rain,ctx_rain,rainDrops,timer_rain;
+var rain_canvas,rain_ctx,rainDrops,rain_timer;
 
 window.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementsByName('rain')[0].addEventListener('click',setup)
-  document.getElementsByName('rain')[0].checked = false;
+  $('#rain_input').on('click',setup);
 },false)
 
 
@@ -17,19 +16,19 @@ class RainDrop{
   }
 
   show(){
-    ctx_rain.beginPath();
-    ctx_rain.strokeStyle = '#7bb8d3';
-    ctx_rain.moveTo(this.x, this.y);
-    ctx_rain.lineTo(this.x, this.y + this.l);
-    ctx_rain.stroke();
+    rain_ctx.beginPath();
+    rain_ctx.strokeStyle = '#7bb8d3';
+    rain_ctx.moveTo(this.x, this.y);
+    rain_ctx.lineTo(this.x, this.y + this.l);
+    rain_ctx.stroke();
   }
 
   fall(){
     this.y += this.vy;
 
-    if(this.y > canvas_rain.height){
-      this.x = Math.floor(Math.random() * (canvas_rain.width + 10) ) - 5;
-      this.y = Math.floor(Math.random()* -canvas_rain.height );
+    if(this.y > rain_canvas.height){
+      this.x = Math.floor(Math.random() * (rain_canvas.width + 10) ) - 5;
+      this.y = Math.floor(Math.random()* (-rain_canvas.height));
       this.l = Math.floor(Math.random()* 20) + 1;
       this.vy = Math.floor(Math.random()* 10) + 4;
     }
@@ -38,9 +37,9 @@ class RainDrop{
 
 // Loop
 function loop(){
-  canvas_rain.width=document.body.clientWidth;
-  canvas_rain.height=document.body.clientHeight;
-  ctx_rain.clearRect(0,0,canvas_rain.width,canvas_rain.height);
+  rain_canvas.width= $('body').width();
+  rain_canvas.height=$('body').height();
+  rain_ctx.clearRect(0,0,rain_canvas.width,rain_canvas.height);
 
   for(var n=0;n<rainDrops.length;n++ ){
     rainDrops[n].show();
@@ -49,32 +48,32 @@ function loop(){
 }
 
 function setup(){
-  if(document.getElementsByName('rain')[0].checked){
-    canvas_rain = document.createElement("canvas");
+  if($('#rain_input').is(':checked')){
+    rain_canvas = document.createElement("canvas");
 
-    document.body.insertBefore(canvas_rain,document.getElementsByClassName('content')[0]);
+    document.body.insertBefore(rain_canvas,document.getElementsByClassName('content')[0]);
     //set the canvas width and height
-    canvas_rain.width=document.body.clientWidth;
-    canvas_rain.height=document.body.clientHeight;
+    // rain_canvas.width=document.body.clientWidth;
+    // rain_canvas.height=document.body.clientHeight;
+    rain_canvas.width = $('body').width();
+    rain_canvas.height = $('body').height();
+    rain_canvas.id = 'rain';
+    rain_ctx = rain_canvas.getContext('2d');
 
-    canvas_rain.id = 'rain';
-    ctx_rain = canvas_rain.getContext('2d');
-
-    // rain = new Rain(20,20,20,16);
     rainDrops = [];
 
     for(var i=0;i<500;i++){
       rainDrops[i] = new RainDrop(
-        Math.floor(Math.random() * (canvas_rain.width + 10) ) - 5,
-        Math.floor(Math.random()* -canvas_rain.height ),
+        Math.floor(Math.random() * (rain_canvas.width + 10) ) - 5,
+        Math.floor(Math.random()* - rain_canvas.height ),
         Math.floor(Math.random()* 20) + 1,
         Math.floor(Math.random()* 10) + 4
       );
     }
 
-    timer_rain = setInterval(loop,10);
+    rain_timer = setInterval(loop,10);
   }else{
-    document.getElementById('rain').remove()
-    clearInterval(timer_rain)
+    $('#rain').remove();
+    clearInterval(rain_timer);
   }
 }
